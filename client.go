@@ -94,7 +94,7 @@ func (c *Client) Send(msg *Message) (*Response, error) {
 
 	var out Response
 	if err := json.Unmarshal(resBody, &out); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s %s", err.Error(), string(resBody))
 	}
 	return &out, nil
 }
