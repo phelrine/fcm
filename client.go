@@ -92,6 +92,10 @@ func (c *Client) Send(msg *Message) (*Response, error) {
 		return nil, fmt.Errorf("%s %s", res.Status, string(resBody))
 	}
 
+	if len(resBody) == 0 {
+		return nil, fmt.Errorf("Response body is empty")
+	}
+
 	var out Response
 	if err := json.Unmarshal(resBody, &out); err != nil {
 		return nil, fmt.Errorf("%s %s", err.Error(), string(resBody))
